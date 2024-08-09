@@ -4,8 +4,8 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 export default function TabsLayout() {
   return (
     <Tabs
-      screenOptions={{ tabBarActiveTintColor: "red", tabBarShowLabel: false }}
-    >
+      screenOptions={{ tabBarActiveTintColor: "black", tabBarShowLabel: false }}
+    > 
       <Tabs.Screen
         name="index"
         options={{
