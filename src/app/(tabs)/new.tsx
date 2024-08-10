@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Image, Pressable, Text, TextInput, View } from "react-native";
 import * as ImagePicker from "expo-image-picker";
+import Button from "~/src/components/Button";
 
 const defaultImage =
   "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/1.jpg";
@@ -47,12 +48,7 @@ export default function CreatePost() {
         onChangeText={(value) => setCaption(value)}
       />
       {/* Submit Button */}
-      <Pressable
-        style={{ marginTop: "auto" }}
-        className="bg-blue-500 p-4 items-center rounded-md w-full "
-      >
-        <Text className="text-white font-semibold">Share</Text>
-      </Pressable>
+      <Button title="Post" onPress={() => {}} />
     </View>
   );
 }
