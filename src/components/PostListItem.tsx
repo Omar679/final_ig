@@ -1,5 +1,6 @@
 import { Image, Text, View, useWindowDimensions } from "react-native";
 import { Ionicons, Feather, AntDesign } from "@expo/vector-icons";
+import { ResizeMode, Video } from "expo-av";
 
 export default function PostListItem({ post }: { post: any }) {
   //Post Image
@@ -14,7 +15,18 @@ export default function PostListItem({ post }: { post: any }) {
         />
         <Text className="font-semibold"> {post.user.username} </Text>
       </View>
-      <Image source={{ uri: post.image }} className="w-full aspect-square" />
+      {post.media_type == "image" ? (
+        <Image source={{ uri: post.image }} className="w-full aspect-square" />
+      ) : (
+        <Video
+          style={{ width: "100%", aspectRatio: 1 }}
+          source={{
+            uri: post.image,
+          }}
+          useNativeControls
+          resizeMode={ResizeMode.CONTAIN}
+        />
+      )}
       <View className="flex-row gap-3 p-3 ">
         <AntDesign name="hearto" size={20} color="black" />
         <Ionicons name="chatbubble-outline" size={20} />
@@ -25,4 +37,3 @@ export default function PostListItem({ post }: { post: any }) {
     </View>
   );
 }
-  
