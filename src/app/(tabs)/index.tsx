@@ -14,7 +14,7 @@ export default function FeedScreen() {
     let { data, error } = await supabase
       .from("posts")
       .select("*, user:profiles(*)");
-    console.log(data);
+    // console.log(data);
     setPosts(data);
   };
   if (!posts) {

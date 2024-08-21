@@ -24,11 +24,12 @@ export default function ProfileScreen() {
 
     setUsername(profile.username);
     setFullName(profile.full_name);
+    setImage(profile.avatar_url);
   };
 
   const [fullName, setFullName] = useState("");
   const [username, setUsername] = useState("");
-  const [image, setImage] = useState(null || String);
+  const [image, setImage] = useState("");
 
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
