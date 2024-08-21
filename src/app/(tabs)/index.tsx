@@ -1,9 +1,30 @@
-import { FlatList, Image, Text, View } from "react-native";
-import posts from "~/assets/data/posts.json";
-import { Ionicons, Feather, AntDesign } from "@expo/vector-icons";
+import { useEffect, useState } from "react";
+import { ActivityIndicator, FlatList, View } from "react-native";
+import postss from "~/assets/data/posts.json";
 import PostListItem from "~/src/components/PostListItem";
+import { supabase } from "~/src/lib/superbase";
 
 export default function FeedScreen() {
+  const [posts, setPosts] = useState([]);
+  useEffect(() => {
+    fetchPosts();
+  }, []);
+
+  const fetchPosts = async () => {
+    let { data, error } = await supabase
+      .from("posts")
+      .select("*, user:profiles(*)");
+    console.log(data);
+    setPosts(data);
+  };
+  if (!posts) {
+    return (
+      <View style={{ alignItems: "center", justifyContent: "center", flex: 1 }}>
+        <ActivityIndicator />
+      </View>
+    );
+  }
+
   return (
     <FlatList
       data={posts}
@@ -12,10 +33,4 @@ export default function FeedScreen() {
       renderItem={({ item }) => <PostListItem post={item} />}
     />
   );
-  // return (
-  //   <View>
-  //
-  //     <PostListItem post ={posts[1]} />
-  //   </View>
-  // );
 }

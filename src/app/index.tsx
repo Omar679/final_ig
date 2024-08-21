@@ -4,7 +4,7 @@ import { Link, Redirect } from "expo-router";
 
 const Home = () => {
   return (
-    <View>
+    <View >
       <Redirect href={"(tabs)"} />
     </View>
   );

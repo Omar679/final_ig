@@ -1,51 +1,28 @@
 import { Image, Text, View, useWindowDimensions } from "react-native";
 import { Ionicons, Feather, AntDesign } from "@expo/vector-icons";
 
-import { AdvancedImage } from "cloudinary-react-native";
-
-import { thumbnail } from "@cloudinary/url-gen/actions/resize";
-import { byRadius } from "@cloudinary/url-gen/actions/roundCorners";
-import { focusOn } from "@cloudinary/url-gen/qualifiers/gravity";
-import { FocusOn } from "@cloudinary/url-gen/qualifiers/focusOn";
-import { cld } from "../lib/cloudinary";
-
-export default function PostListItem({ post }) {
-  const { width } = useWindowDimensions();
-//Post Image
-  // cld.image returns a CloudinaryImage with the configuration set.
-  const image = cld.image(post.image);
-  // Apply the transformation.
-  image.resize(thumbnail().width(width).height(width)); // Crop the image, focusing on the face.
-  // Round the corners.
-
-//Avatar Image
-
-const avatar = cld.image(post.user.avatar_url);
-avatar.resize(thumbnail().width(48).height(48).gravity(focusOn(FocusOn.face()))); // Crop the image, focusing on the face.
-
+export default function PostListItem({ post }: { post: any }) {
+  //Post Image
 
   return (
     <View className="bg-white">
       {/* Header */}
       <View className=" p-3 flex-row gap-2 items-center">
-        <AdvancedImage
-        cldImg={avatar}
-          className="w-12 aspect-square rounded-full"
+        <Image
+          source={{ uri: post.user.avatar_url }}
+          className="w-8 h-8 rounded-full"
         />
-        <Text className="font-semibold"> {post.user.username}</Text>
+        <Text className="font-semibold"> {post.user.username} </Text>
       </View>
-      {/* <Image
-        source={{ uri: post.image_url }}
-        className="w-full aspect-square"
-      /> */}
-      <AdvancedImage cldImg={image} className="w-full aspect-square" />
+      <Image source={{ uri: post.image }} className="w-full aspect-square" />
       <View className="flex-row gap-3 p-3 ">
         <AntDesign name="hearto" size={20} color="black" />
         <Ionicons name="chatbubble-outline" size={20} />
         <Feather name="send" size={20} />
-
         <Feather name="bookmark" size={20} style={{ marginLeft: "auto" }} />
       </View>
+      <Text>{post.caption}</Text>
     </View>
   );
 }
+  
